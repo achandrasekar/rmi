@@ -1,4 +1,6 @@
-public class Message {
+package network;
+
+public class Message implements java.io.Serializable {
 	String method;
 	Object[] args;
 	
