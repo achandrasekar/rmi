@@ -1,9 +1,8 @@
-import network.*;
-
-public class Server {
+public class Server implements Remote440 {
 	
 	public static void main(String[] args) throws Exception {
-		new ReceiveMessage(Integer.parseInt(args[0]));
+		Server s = new Server();
+		Registry440.bind("Server", s);
 	}
 	
 	boolean contain(String str1, String str2) {
