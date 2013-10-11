@@ -20,7 +20,7 @@ import rmi.server.Server;
 public class Registry implements RegistryInterface{
 
 	String ip;
-	public static final int port = 2500;		// Well known port number for our version of rmi registry.
+	public static int port = 2500;		// Well known port number for our version of rmi registry.
 	String name = "registry";
 	RegisterTable rTable;
 	
@@ -30,6 +30,15 @@ public class Registry implements RegistryInterface{
 	}
 	
 	public static void main(String[] args) throws UnknownHostException{
+		
+		if(args.length != 1){
+			System.err.println("parameter error.");
+			System.err.println("Example: java rmi.registry.Registry portNum");
+			return;
+		}
+		
+		Registry.port = Integer.parseInt(args[0]);
+		
 		// get ip address. If cannot get local ip address, terminate the program.
 		String ip = InetAddress.getLocalHost().getHostAddress();
 		Registry registry = new Registry(ip);

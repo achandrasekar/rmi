@@ -9,10 +9,10 @@ import rmi.server.Server;
 
 
 public class Naming {
-	public static void bind(String serverName, Object obj){
+	public static void bind(String serverName, Object obj, String ip, int port){
 		
 		Server server = new Server(serverName, obj);
-		if(!server.registServer()){
+		if(!server.registServer(ip, port)){
 			System.err.println("error in registering server:"+serverName);
 			return;
 		}
@@ -21,13 +21,12 @@ public class Naming {
 		System.out.println("success");
 	}
 	
-	public static Object lookup(String serverURL){
+	public static Object lookup(String serverURL, int port){
 		try {
 			rmiParser parser = new rmiParser(serverURL);
 			String name = parser.getName();
 			System.out.println("name:"+name);
 			String ip = parser.getIp();
-			int port = Registry.port;
 			
 			RemoteRef remoteRegistry = new RemoteRef(ip, port);
 			

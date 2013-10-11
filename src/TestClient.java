@@ -14,7 +14,7 @@ public class TestClient {
 	}
 	
 	private static void testFibonacci(int i){
-		FibonacciInterface fibo = (FibonacciInterface)Naming.lookup(fiboService);
+		FibonacciInterface fibo = (FibonacciInterface)Naming.lookup(fiboService, 2600);
 		System.out.println("fiboclass"+fibo.getClass());
 		try {
 			System.out.println("fibonacci is:"+fibo.calFibonacci(i));
@@ -24,7 +24,7 @@ public class TestClient {
 	}
 	
 	private static void testPassByReference(){
-		GetFiboInterface getfibo = (GetFiboInterface)Naming.lookup(getFiboService);
+		GetFiboInterface getfibo = (GetFiboInterface)Naming.lookup(getFiboService, 2600);
 		
 		try {
 			System.out.println(getfibo.getFibonacci().calFibonacci(3));

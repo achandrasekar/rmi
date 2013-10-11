@@ -147,7 +147,7 @@ public class Server implements Runnable{
 	}
 
 
-	// default version. registry's IP default to local ip
+/*	// default version. registry's IP default to local ip
 	public boolean registServer(){
 		
 		this.init();
@@ -166,18 +166,23 @@ public class Server implements Runnable{
 			return false;
 		}
 		
-	}
+	}*/
 	
 
 	// registry's IP is specified in ip
-	public boolean registServer(String ipAddr){
-		// TODO Communicate with registry.
+	public boolean registServer(String ipAddr, int port){
+		this.init();
 		
 		ip = ipAddr;
-		RegistryInterface reg  = new RegistryStub(new RemoteRef(ip, Registry.port));
+		Registry.port = port;
+		RegistryInterface reg  = new RegistryStub(new RemoteRef(ip, port));
 		try {
 			// invoke the remote method in registry to register this service
-			return reg.register(name, this.serveStubObj, url);
+			if(reg.register(name, this.serveStubObj, url)){
+				ServiceTable.insert(serveObj.getClass().getCanonicalName(), this.port);
+				return true;
+			}
+			return false;
 		} catch (Remote440Exception e) {
 			e.printStackTrace();
 			return false;
