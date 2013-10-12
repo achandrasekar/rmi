@@ -57,6 +57,7 @@ public class Registry implements RegistryInterface{
 							URL url) 
 	{
 		rTable.registerService(name, obj, url);
+		System.out.println("currently registered services are:");
 		rTable.print();
 		return true;
 	}

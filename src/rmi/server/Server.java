@@ -116,7 +116,6 @@ public class Server implements Runnable{
 	public static Object getStubObj(Object obj, String ipAddr, int portNum){
 		Object stubObj = null;
 		String className = obj.getClass().getCanonicalName();
-		System.out.println("obj's original name is:"+className);
 		String stubClassName = className+"Stub";
 		RemoteRef ref = new RemoteRef(ipAddr, portNum);
 		try {
@@ -173,9 +172,8 @@ public class Server implements Runnable{
 	public boolean registServer(String ipAddr, int port){
 		this.init();
 		
-		ip = ipAddr;
 		Registry.port = port;
-		RegistryInterface reg  = new RegistryStub(new RemoteRef(ip, port));
+		RegistryInterface reg  = new RegistryStub(new RemoteRef(ipAddr, port));
 		try {
 			// invoke the remote method in registry to register this service
 			if(reg.register(name, this.serveStubObj, url)){
@@ -214,7 +212,6 @@ public class Server implements Runnable{
 				continue;
 			}
 			Transaction tran = new Transaction(serveObj, sock, ip, port);
-			System.out.println("transaction has been constructed");
 			executor.execute(tran); 			// create a new thread to do this transaction
 		}
 		

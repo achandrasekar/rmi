@@ -63,7 +63,6 @@ public class TestClient {
 
 		FibonacciInterface fibo = (FibonacciInterface)Naming.lookup(fiboService, port);
 
-		System.out.println("fiboclass"+fibo.getClass());
 		try {
 			System.out.println("fibonacci is:"+fibo.calFibonacci(i));
 		} catch (Remote440Exception e) {
@@ -76,7 +75,7 @@ public class TestClient {
 		GetFiboInterface getfibo = (GetFiboInterface)Naming.lookup(getFiboService, port);
 		
 		try {
-			System.out.println(getfibo.getFibonacci().calFibonacci(n));
+			System.out.println("fibonacci is:"+getfibo.getFibonacci().calFibonacci(n));
 		} catch (Remote440Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

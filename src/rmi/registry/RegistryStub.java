@@ -42,7 +42,6 @@ public class RegistryStub extends Remote440Stub
 														new Parameter(Object.class, obj),
 														new Parameter(URL.class, url)
 														});
-			System.out.println("super has invoked");
 			
 			
 			return (Boolean)retObj; 
@@ -73,7 +72,6 @@ public class RegistryStub extends Remote440Stub
 			Tuple retObj = (Tuple)super.invoke(method, 
 										new Parameter[]{new Parameter(String.class, serviceName)});
 			
-			System.out.println("super has invoked");
 			
 			if(retObj == null){
 				System.err.println("service not fount");

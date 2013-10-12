@@ -15,7 +15,6 @@ public class RemoteInvocation {
 	
 	public void setMethodName(String name){
 		method = name;
-		System.out.println("method name is:"+method);
 	}
 	
 	// add a parameter into pList based on type and obj

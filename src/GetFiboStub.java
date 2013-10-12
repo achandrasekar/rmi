@@ -32,7 +32,6 @@ public class GetFiboStub extends Remote440Stub
 			
 			Object retObj = super.invoke(method, null);
 			
-			System.out.println("super has invoked");
 			
 			return (FibonacciInterface) retObj;
 		} catch (SecurityException e) {

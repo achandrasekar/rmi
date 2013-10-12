@@ -38,6 +38,5 @@ public class Tuple implements Serializable{
 		System.out.println("name:"+name);
 		System.out.println("Object Type:"+obj.getClass().getSimpleName());
 		System.out.println("url: " + url.getPath());
-		System.out.println();
 	}
 }

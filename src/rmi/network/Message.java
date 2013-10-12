@@ -18,7 +18,7 @@ public class Message {
 			oos.writeObject(method);
 			oos.writeObject(paramNum);
 			for(int i = 0; i < paramNum; i++){
-				System.out.println("send type is:"+params[i].getParamObj().getClass().getSimpleName());
+				//System.out.println("send type is:"+params[i].getParamObj().getClass().getSimpleName());
 				oos.writeObject(params[i].getParamType());
 				oos.writeObject(params[i].getParamObj());
 			}
@@ -43,11 +43,11 @@ public class Message {
 			// receive and set method name
 			String method = (String)ois.readObject();
 			invoc.setMethodName(method);
-			System.out.println("method name is "+method+"  in Message");
+			//System.out.println("method name is "+method+"  in Message");
 			
 			// get parameter number
 			Integer paramNum = (Integer)ois.readObject();
-			System.out.println("parameter number is "+paramNum);
+			//System.out.println("parameter number is "+paramNum);
 			
 			// get each parameter
 			for(int i = 0; i < paramNum; i++){
@@ -70,7 +70,7 @@ public class Message {
 	// return true if success, false otherwise.
 	public static boolean sendParam(ObjectOutputStream oos, Parameter param){
 		try {
-			System.out.println("type is"+param.getParamType());
+			//System.out.println("type is"+param.getParamType());
 			oos.writeObject(param.getParamType());	// send type
 			oos.writeObject(param.getParamObj());	// send object
 		} catch (IOException e) {
@@ -86,10 +86,7 @@ public class Message {
 	public static Parameter recParam(ObjectInputStream ois) throws IOException, ClassNotFoundException{
 		// first read type
 		Class<?> type = (Class<?>)ois.readObject();
-		if(type != null)
-			System.out.println("parameter type is "+type.getSimpleName());
-		else
-			System.out.println("parameter type is null");
+
 		// then read object
 		Object obj = ois.readObject();
 		Parameter received = new Parameter(type, obj);

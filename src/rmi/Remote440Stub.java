@@ -44,7 +44,6 @@ public class Remote440Stub implements Remote440{
 			int paramNum = params.length;
 			// send method invocation request to remote server
 			Message.sendRemoteInvocation(oos, method.getName(), paramNum, params);
-			System.out.println("invocation message has been sent");
 		}
 		
 		// receive return value

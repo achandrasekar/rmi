@@ -40,7 +40,6 @@ public class FibonacciStub
 			Object retObj = super.invoke(method, 
 										new Parameter[]{new Parameter(int.class, a)});
 			
-			System.out.println("super has invoked");
 			
 			
 			return (Integer)retObj; 

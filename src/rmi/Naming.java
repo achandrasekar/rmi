@@ -18,14 +18,13 @@ public class Naming {
 		}
 		
 		new Thread(server).start();
-		System.out.println("success");
+		System.out.println("successfully registerd \""+serverName+"\" in registry");
 	}
 	
 	public static Object lookup(String serverURL, int port){
 		try {
 			rmiParser parser = new rmiParser(serverURL);
 			String name = parser.getName();
-			System.out.println("name:"+name);
 			String ip = parser.getIp();
 			
 			RemoteRef remoteRegistry = new RemoteRef(ip, port);

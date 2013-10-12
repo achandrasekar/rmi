@@ -50,9 +50,7 @@ public class Transaction implements Runnable{
 			return;
 		}
 		
-		System.out.println("in transaction, before receive invocation request");
 		RemoteInvocation rmtInvoc = Message.recRemoteInvocation(ois);
-		System.out.println("in transaction, after receive invocation request");
 		Class<?> objType = srcObj.getClass();
 		Class<?>[] paramTypes = rmtInvoc.getParamTypeArray();
 		Object[] paramObjs = rmtInvoc.getparamObjArray();
@@ -61,9 +59,17 @@ public class Transaction implements Runnable{
 
 		try {
 			// get the Method object based on above information
-			System.out.println("method name is:"+methodName);
-			for(int i = 0; i < paramTypes.length; i++){
-				System.out.println("param type is:"+paramTypes[i].getSimpleName());
+			System.out.println("=====================================");
+			System.out.println("requested method name is:"+methodName);
+			if(paramTypes.length == 0)
+				System.out.println("parameter number is 0");
+			else{
+				System.out.println("parameter number is "+paramTypes.length);
+				System.out.print("parameter types are:");
+				for(int i = 0; i < paramTypes.length; i++){
+					System.out.print(" "+paramTypes[i].getSimpleName());
+				}
+				System.out.println();
 			}
 			
 			// deal with method without parameters
@@ -85,7 +91,10 @@ public class Transaction implements Runnable{
 			if(retType.equals(Void.class)){
 				Object retObj = new Object();
 				System.out.println("return object type is:"+retType.getSimpleName());
+				System.out.println("=====================================");
+				method.invoke(srcObj, paramObjs);
 				Message.sendParam(oos, new Parameter(retType, retObj));
+				return;
 			}
 			
 			Object retObj = method.invoke(srcObj, paramObjs);
@@ -101,9 +110,11 @@ public class Transaction implements Runnable{
 				}
 				System.out.println("return object type is:"+retObj.getClass().getSimpleName());
 				Message.sendParam(oos, new Parameter(retObj.getClass(), retObj));
+				System.out.println("=====================================");
 			}else{
 				System.out.println("return object type is null");
 				Message.sendParam(oos, new Parameter(null, retObj));
+				System.out.println("=====================================");
 			}
 			
 		} catch (SecurityException e) {
@@ -131,9 +142,8 @@ public class Transaction implements Runnable{
 		Class<?>[] interfaceArray = obj.getClass().getInterfaces();
 		for(int i = 0; i < interfaceArray.length; i++){
 			System.out.println("interface:"+interfaceArray[i].getCanonicalName());
-			if(interfaceArray[i].equals(Remote.class))
-			{
-				System.out.println("interface:"+interfaceArray[i].getCanonicalName());
+			if(interfaceArray[i].equals(Remote.class)){
+				System.out.println(obj.getClass().getSimpleName()+" has implemented Remote interface");
 				return true;
 			}
 		}
