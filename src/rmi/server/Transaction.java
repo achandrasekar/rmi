@@ -138,7 +138,6 @@ public class Transaction implements Runnable{
 	// if obj has implemented Remote interface
 	// then we pass by reference
 	private boolean isByReference(Object obj){
-		System.out.println(obj.getClass().getCanonicalName());
 		Class<?>[] interfaceArray = obj.getClass().getInterfaces();
 		for(int i = 0; i < interfaceArray.length; i++){
 			System.out.println("interface:"+interfaceArray[i].getCanonicalName());

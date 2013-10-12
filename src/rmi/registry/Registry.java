@@ -67,8 +67,8 @@ public class Registry implements RegistryInterface{
 	 */
 	@Override
 	public Object lookup(String serviceName) throws Remote440Exception {
-		System.out.println("servecieName:"+serviceName);
 		Tuple t = rTable.findByName(serviceName);
+		System.out.println("currently registered services are:");
 		rTable.print();
 		if(t == null)
 			System.out.println("service not found");
